@@ -1,4 +1,10 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim AS base
+
+RUN sed -i 's/main/main contrib/g' /etc/apt/sources.list.d/debian.sources && \
+    apt-get update && \
+    echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections && \
+    apt-get install -y --no-install-recommends ttf-mscorefonts-installer fontconfig && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install core libraries
 RUN apt-get update && apt-get install -y \
