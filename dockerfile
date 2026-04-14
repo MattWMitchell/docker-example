@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-bookworm-slim AS base
 
 RUN sed -i 's/main/main contrib/g' /etc/apt/sources.list.d/debian.sources && \
     apt-get update && \
